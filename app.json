@@ -8,7 +8,11 @@
     "scheme": "umuvrider",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bitcode": false,
+      "config": {
+        "googleMapsApiKey": "AIzaSyAH4Pgnn0w3pHficCyhTVvy3wSW_gnZHdc"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -17,10 +21,26 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WAKE_LOCK",
+        "android.permission.BLUETOOTH"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAH4Pgnn0w3pHficCyhTVvy3wSW_gnZHdc"
+        }
+      },
+      "package": "com.murambitc.umuvrider"
     },
     "web": {
-      "output": "server",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -32,11 +52,28 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
+      ],
+      "expo-secure-store",
+      "@config-plugins/react-native-webrtc",
+      "react-native-maps",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "extraProguardRules": "-keep class org.webrtc.** { *; }\n-keep class com.oney.WebRTCModule.** { *; }"
+          }
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fc1d4e8e-f0ab-47aa-ae7f-4e1817a11f14"
+      }
     }
   }
 }
