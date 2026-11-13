@@ -39,5 +39,18 @@ yarn-error.*
 example
 
 # generated native folders
-/ios
-/android
+android/
+ios/
+
+# Android build cache (CRITICAL — causes EAS Linux path errors)
+android/.gradle/
+android/build/
+android/app/build/
+android/.cxx/
+android/local.properties
+android/.idea/
+
+# iOS build cache
+ios/build/
+ios/Pods/
+ios/.xcode.env.local
