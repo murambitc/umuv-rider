@@ -1,18 +1,28 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+// umuv-rider/src/app/_layout.tsx
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { Stack } from 'expo-router';
+import { AuthProvider } from '../context/AuthContext';
+import { StatusBar } from 'expo-status-bar';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <AuthProvider>
+      <StatusBar style="dark" />
+      <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+        {/* Auth */}
+        <Stack.Screen name="index" options={{ animation: 'none' }} />
+      
+
+        {/* Tabs (main app) */}
+        <Stack.Screen name="(tabs)" options={{ animation: 'none' }} />
+
+        {/* Modals & full-screen pushes */}
+        <Stack.Screen name="pick-location" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="trip/[id]" />
+        <Stack.Screen name="trip/[id]/chat" />
+        <Stack.Screen name="trip/[id]/call" />
+        <Stack.Screen name="trip/[id]/rate" />
+      </Stack>
+    </AuthProvider>
   );
 }
